@@ -8,8 +8,13 @@ const PhotoModal = ({ photo = null, show, handleClose, handleSubmit }) => {
 	const [inputUrl, setInputUrl] = useState('');
 
 	useEffect(() => {
-		setInputTitle(show === true && photo !== null ? photo.title : '');
-		setInputUrl(show === true && photo !== null ? photo.url : '');
+		if (show === true && photo !== null) {
+			setInputTitle(photo.title);
+			setInputUrl(photo.url);
+		} else {
+			setInputTitle('');
+			setInputUrl('');
+		}
 	}, [photo, show]);
 
 	const onTitleChange = ({ target: { value } }) => {
@@ -21,7 +26,7 @@ const PhotoModal = ({ photo = null, show, handleClose, handleSubmit }) => {
 	};
 
 	const onFormSubmit = () => {
-		handleSubmit(inputTitle, inputUrl);
+		handleSubmit({ title: inputTitle, url: inputUrl });
 	};
 
 	return (
