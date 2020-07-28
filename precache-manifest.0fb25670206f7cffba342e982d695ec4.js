@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bea41dc20f6304703f8956c0a6e635c9",
+    "revision": "23a1f89ac43ec2fd78724487a773b10e",
     "url": "/Albums-React/index.html"
   },
   {
-    "revision": "c920e072ef60ab5a36c0",
+    "revision": "1ab72831b1d130150a01",
     "url": "/Albums-React/static/css/2.af3c1da9.chunk.css"
   },
   {
-    "revision": "c920e072ef60ab5a36c0",
-    "url": "/Albums-React/static/js/2.09495c2d.chunk.js"
+    "revision": "1ab72831b1d130150a01",
+    "url": "/Albums-React/static/js/2.c80b607d.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/Albums-React/static/js/2.09495c2d.chunk.js.LICENSE.txt"
+    "url": "/Albums-React/static/js/2.c80b607d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "46cad7a8e1d7f0e29dbe",
-    "url": "/Albums-React/static/js/main.38230a97.chunk.js"
+    "revision": "6d6a9ccea492e3f9de09",
+    "url": "/Albums-React/static/js/main.5811430c.chunk.js"
   },
   {
     "revision": "09b834eed75b488e1890",
