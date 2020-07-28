@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/Albums-React/static/js/main.318af8aa.chunk.js",
-    "main.js.map": "/Albums-React/static/js/main.318af8aa.chunk.js.map",
+    "main.js": "/Albums-React/static/js/main.38230a97.chunk.js",
+    "main.js.map": "/Albums-React/static/js/main.38230a97.chunk.js.map",
     "runtime-main.js": "/Albums-React/static/js/runtime-main.1a5b3a6d.js",
     "runtime-main.js.map": "/Albums-React/static/js/runtime-main.1a5b3a6d.js.map",
     "static/css/2.af3c1da9.chunk.css": "/Albums-React/static/css/2.af3c1da9.chunk.css",
-    "static/js/2.5c22d0e8.chunk.js": "/Albums-React/static/js/2.5c22d0e8.chunk.js",
-    "static/js/2.5c22d0e8.chunk.js.map": "/Albums-React/static/js/2.5c22d0e8.chunk.js.map",
+    "static/js/2.09495c2d.chunk.js": "/Albums-React/static/js/2.09495c2d.chunk.js",
+    "static/js/2.09495c2d.chunk.js.map": "/Albums-React/static/js/2.09495c2d.chunk.js.map",
     "index.html": "/Albums-React/index.html",
-    "precache-manifest.a2730c9aadbc90d560958c54ffad777d.js": "/Albums-React/precache-manifest.a2730c9aadbc90d560958c54ffad777d.js",
+    "precache-manifest.9f3cc14a9c49f11b060a008ad8224494.js": "/Albums-React/precache-manifest.9f3cc14a9c49f11b060a008ad8224494.js",
     "service-worker.js": "/Albums-React/service-worker.js",
     "static/css/2.af3c1da9.chunk.css.map": "/Albums-React/static/css/2.af3c1da9.chunk.css.map",
-    "static/js/2.5c22d0e8.chunk.js.LICENSE.txt": "/Albums-React/static/js/2.5c22d0e8.chunk.js.LICENSE.txt"
+    "static/js/2.09495c2d.chunk.js.LICENSE.txt": "/Albums-React/static/js/2.09495c2d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1a5b3a6d.js",
     "static/css/2.af3c1da9.chunk.css",
-    "static/js/2.5c22d0e8.chunk.js",
-    "static/js/main.318af8aa.chunk.js"
+    "static/js/2.09495c2d.chunk.js",
+    "static/js/main.38230a97.chunk.js"
   ]
 }
