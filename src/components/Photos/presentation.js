@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import Spinner from 'react-bootstrap/Spinner';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import CardColumns from 'react-bootstrap/CardColumns';
@@ -66,24 +67,44 @@ const Presentation = props => {
 		);
 	});
 
-	let render;
-	if (props.isLoadingAlbum === true) render = <div>loading</div>;
-	else if (props.isLoadingAlbum === false && cards.length <= 0)
-		render = (
-			<Alert show={true} variant='danger'>
-				<Alert.Heading>This is an Invalid Album</Alert.Heading>
-				<p>
-					Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
-					lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
-					fermentum.
-				</p>
+	let render =
+		props.isLoadingAlbum === true ? (
+			<Alert show={true} variant='info' className='text-center'>
+				<Alert.Heading>Loading the Current Album</Alert.Heading>
+				<div>
+					It should take less than a minute to load your Album. Please stick around.
+				</div>
+				<div>
+					If it takes longer than you can go back to the Home Page or reload.
+				</div>
+				<hr />
+				<div className='text-right'>
+					<Spinner animation='border' />
+				</div>
 			</Alert>
-		);
-	else
-		render = (
+		) : cards.length <= 0 ? (
+			<Alert show={true} variant='danger' className='text-center'>
+				<Alert.Heading>This is an Invalid Album</Alert.Heading>
+				<div>
+					The Album Id that you have entered is invalid. Please make sure you have
+					entered a valid Album Id
+				</div>
+				<hr />
+				<div>
+					You can go back to the{' '}
+					<Alert.Link as={Link} to='/'>
+						Home Page
+					</Alert.Link>{' '}
+					and try again.
+				</div>
+			</Alert>
+		) : (
 			<React.Fragment>
+				<Button as={Link} to='/' block variant='dark' className='mb-4'>
+					Go back to Home
+				</Button>
 				<CardColumns>{cards}</CardColumns>
-				<Button variant='primary' onClick={props.onCreateFormOpen}>
+				<Button block variant='primary' onClick={props.onCreateFormOpen}>
 					Create a New Card
 				</Button>
 			</React.Fragment>
@@ -91,12 +112,7 @@ const Presentation = props => {
 
 	return (
 		<React.Fragment>
-			<Jumbotron>
-				<Button as={Link} to='/' variant='dark' className='mb-4'>
-					Go back to Home
-				</Button>
-				{render}
-			</Jumbotron>
+			<Jumbotron>{render}</Jumbotron>
 
 			<PhotoModal
 				photo={props.updateFormPhoto}

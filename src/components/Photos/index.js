@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import JsonPlaceholder from '../../apis/JsonPlaceholder';
 import Presentation from './presentation';
 
-const Photos = ({ match }) => {
+const Photos = props => {
 	const [photos, setPhotos] = useState([]);
 	const [updateFormPhoto, setUpdateFormPhoto] = useState(null);
 	const [isUpdating, setIsUpdating] = useState(null);
@@ -14,59 +14,67 @@ const Photos = ({ match }) => {
 	useEffect(() => {
 		setIsLoadingAlbum(true);
 		JsonPlaceholder.get('/photos', {
-			params: { albumId: match.params.id },
+			params: { albumId: props.match.params.id },
 		}).then(res => {
-			console.groupCollapsed(`New Photos with Album Id : ${match.params.id}`);
+			console.groupCollapsed(`New Photos with Album Id : ${props.match.params.id}`);
 			console.log(res.data);
 			console.groupEnd();
 			setPhotos(res.data);
 			setIsLoadingAlbum(false);
 		});
-	}, [match.params.id]);
+	}, [props.match.params.id]);
 
-	const onCreateFormOpen = () => {
-		setCreateFormShow(true);
+	const createHandlers = {
+		onCreateFormOpen: () => {
+			setCreateFormShow(true);
+		},
+
+		onCreateFormClose: () => {
+			setCreateFormShow(false);
+		},
+
+		onCreateFormSubmit: formData => {
+			setCreateFormShow(false);
+			JsonPlaceholder.post('/photos', formData).then(({ data }) => {
+				setPhotos(prev => [...prev, data]);
+			});
+		},
 	};
 
-	const onCreateFormClose = () => {
-		setCreateFormShow(false);
-	};
-
-	const onCreateFormSubmit = formData => {
-		setCreateFormShow(false);
-		JsonPlaceholder.post('/photos', formData).then(({ data }) => {
-			setPhotos(prev => [...prev, data]);
-		});
-	};
-
-	const onCardDelete = (delPhoto, index) => () => {
-		setIsDeleting(index);
-		JsonPlaceholder.delete(`/photos/${delPhoto.id}`).then(() => {
-			setPhotos(prevPhotos => prevPhotos.filter(photo => photo.id !== delPhoto.id));
-			setIsDeleting(null);
-		});
-	};
-
-	const onUpdateFormOpen = (photo, index) => () => {
-		setUpdateFormPhoto(photo);
-		setIsUpdating(index);
-	};
-
-	const onUpdateFormClose = () => {
-		setUpdateFormPhoto(null);
-		setIsUpdating(null);
-	};
-
-	const onUpdateFormSubmit = formData => {
-		setUpdateFormPhoto(null);
-		JsonPlaceholder.patch(`/photos/${updateFormPhoto.id}`, formData).then(
-			({ data }) => {
+	const deleteHandlers = {
+		onCardDelete: (delPhoto, index) => () => {
+			setIsDeleting(index);
+			JsonPlaceholder.delete(`/photos/${delPhoto.id}`).then(() => {
 				setPhotos(prevPhotos =>
-					prevPhotos.map(photo => (photo.id === data.id ? data : photo))
+					prevPhotos.filter(photo => photo.id !== delPhoto.id)
 				);
-				setIsUpdating(null);
-			}
-		);
+				setIsDeleting(null);
+			});
+		},
+	};
+
+	const updateHandlers = {
+		onUpdateFormOpen: (photo, index) => () => {
+			setUpdateFormPhoto(photo);
+			setIsUpdating(index);
+		},
+
+		onUpdateFormClose: () => {
+			setUpdateFormPhoto(null);
+			setIsUpdating(null);
+		},
+
+		onUpdateFormSubmit: formData => {
+			setUpdateFormPhoto(null);
+			JsonPlaceholder.patch(`/photos/${updateFormPhoto.id}`, formData).then(
+				({ data }) => {
+					setPhotos(prevPhotos =>
+						prevPhotos.map(photo => (photo.id === data.id ? data : photo))
+					);
+					setIsUpdating(null);
+				}
+			);
+		},
 	};
 
 	return (
@@ -77,13 +85,9 @@ const Photos = ({ match }) => {
 			createFormShow={createFormShow}
 			isDeleting={isDeleting}
 			isLoadingAlbum={isLoadingAlbum}
-			onCreateFormOpen={onCreateFormOpen}
-			onCreateFormClose={onCreateFormClose}
-			onCreateFormSubmit={onCreateFormSubmit}
-			onCardDelete={onCardDelete}
-			onUpdateFormOpen={onUpdateFormOpen}
-			onUpdateFormClose={onUpdateFormClose}
-			onUpdateFormSubmit={onUpdateFormSubmit}
+			{...createHandlers}
+			{...deleteHandlers}
+			{...updateHandlers}
 		/>
 	);
 };
